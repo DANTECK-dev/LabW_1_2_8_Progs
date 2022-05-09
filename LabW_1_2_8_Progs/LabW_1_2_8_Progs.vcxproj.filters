@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\2_SecondGeneralTask">
+      <UniqueIdentifier>{6414e938-0c82-431a-8876-890b0995da19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\0_MainAndOther">
+      <UniqueIdentifier>{c7edf47e-5995-4301-878c-5ab7c6fa4c28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\4_AdditionalTask">
+      <UniqueIdentifier>{019c8535-602a-44eb-830e-43e21d0e97ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\3_IndividualTask">
+      <UniqueIdentifier>{9dc3027e-4132-401f-b871-84688ee010af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\1_FirstGeneralTask">
+      <UniqueIdentifier>{39a00fbb-a73d-4afc-837f-23f817cdb063}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FirstGeneralTask.cpp">
+      <Filter>Исходные файлы\1_FirstGeneralTask</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesForSecondGeneralTask.cpp">
+      <Filter>Исходные файлы\2_SecondGeneralTask</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondGeneralTask.cpp">
+      <Filter>Исходные файлы\2_SecondGeneralTask</Filter>
+    </ClCompile>
+    <ClCompile Include="ListOfBuyers.cpp">
+      <Filter>Исходные файлы\3_IndividualTask</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Исходные файлы\0_MainAndOther</Filter>
+    </ClCompile>
+    <ClCompile Include="ThisIs.cpp">
+      <Filter>Исходные файлы\0_MainAndOther</Filter>
+    </ClCompile>
+    <ClCompile Include="IndividualTask.cpp">
+      <Filter>Исходные файлы\3_IndividualTask</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FirstGeneralTask.h">
+      <Filter>Исходные файлы\1_FirstGeneralTask</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesForSecondGeneralTask.h">
+      <Filter>Исходные файлы\2_SecondGeneralTask</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondGeneralTask.h">
+      <Filter>Исходные файлы\2_SecondGeneralTask</Filter>
+    </ClInclude>
+    <ClInclude Include="IndividualTask.h">
+      <Filter>Исходные файлы\3_IndividualTask</Filter>
+    </ClInclude>
+    <ClInclude Include="ListOfBuyers.h">
+      <Filter>Исходные файлы\3_IndividualTask</Filter>
+    </ClInclude>
+    <ClInclude Include="ThisIs.h">
+      <Filter>Исходные файлы\0_MainAndOther</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Input_Clients.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pay.html">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="test.html">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+  </ItemGroup>
+</Project>
