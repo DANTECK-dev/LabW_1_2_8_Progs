@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ClassesForSecondGeneralTask.cpp" />
+    <ClCompile Include="AddtionalTask.cpp" />
     <ClCompile Include="FirstGeneralTask.cpp" />
     <ClCompile Include="IndividualTask.cpp" />
     <ClCompile Include="ListOfBuyers.cpp" />
@@ -28,7 +28,7 @@
     <ClCompile Include="ThisIs.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClassesForSecondGeneralTask.h" />
+    <ClInclude Include="AdditionalTask.h" />
     <ClInclude Include="FirstGeneralTask.h" />
     <ClInclude Include="IndividualTask.h" />
     <ClInclude Include="ListOfBuyers.h" />

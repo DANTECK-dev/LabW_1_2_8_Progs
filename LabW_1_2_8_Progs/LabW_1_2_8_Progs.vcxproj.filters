@@ -33,9 +33,6 @@
     <ClCompile Include="FirstGeneralTask.cpp">
       <Filter>Исходные файлы\1_FirstGeneralTask</Filter>
     </ClCompile>
-    <ClCompile Include="ClassesForSecondGeneralTask.cpp">
-      <Filter>Исходные файлы\2_SecondGeneralTask</Filter>
-    </ClCompile>
     <ClCompile Include="SecondGeneralTask.cpp">
       <Filter>Исходные файлы\2_SecondGeneralTask</Filter>
     </ClCompile>
@@ -51,13 +48,13 @@
     <ClCompile Include="IndividualTask.cpp">
       <Filter>Исходные файлы\3_IndividualTask</Filter>
     </ClCompile>
+    <ClCompile Include="AddtionalTask.cpp">
+      <Filter>Исходные файлы\4_AdditionalTask</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FirstGeneralTask.h">
       <Filter>Исходные файлы\1_FirstGeneralTask</Filter>
-    </ClInclude>
-    <ClInclude Include="ClassesForSecondGeneralTask.h">
-      <Filter>Исходные файлы\2_SecondGeneralTask</Filter>
     </ClInclude>
     <ClInclude Include="SecondGeneralTask.h">
       <Filter>Исходные файлы\2_SecondGeneralTask</Filter>
@@ -70,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="ThisIs.h">
       <Filter>Исходные файлы\0_MainAndOther</Filter>
+    </ClInclude>
+    <ClInclude Include="AdditionalTask.h">
+      <Filter>Исходные файлы\4_AdditionalTask</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
