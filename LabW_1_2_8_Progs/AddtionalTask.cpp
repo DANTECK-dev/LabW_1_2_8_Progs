@@ -40,12 +40,12 @@ public:
 		return sizeDate;
 	}
 	operator string() override {
-		string mas;
+		string temp;
 		for (int i = 0; i < sizeMas; i++)
 		{
-			mas += to_string(Mas[i]) + "\n";
+			temp += to_string(Mas[i]) + " ";
 		}
-		return mas;
+		return temp;
 	}
 	void push(int a) override
 	{
@@ -62,21 +62,21 @@ public:
 	}
 	void pop() override
 	{
-		srand(time(0));
 		int rando;
 		rando = 1 + rand() % (count - 1);
 		cout << rando;
-		cout << "Random: " << Mas[rando] << endl;
+		cout << " Random: " << Mas[rando] << endl;
 	}
 	void clear() override
 	{
+		sizeDate = 0;
 		delete Mas;
 	}
 	void show()
 	{
 		for (int i = 0; i < sizeMas; i++)
 		{
-			cout << "Sucsess: " << Mas[i] << endl;
+			cout << "Show: " << Mas[i] << endl;
 		}
 		cout << "SizeDate: " << sizeDate << endl;
 	}
@@ -93,6 +93,7 @@ private:
 			this->date = date;
 		}
 	};
+
 	Node* head;
 	int sizeList;
 public:
@@ -104,7 +105,7 @@ public:
 		string temp;
 		while (ptr != NULL)
 		{
-			temp = "\n" + to_string(ptr->date);
+			temp += to_string(ptr->date) + " ";
 			ptr = ptr->next;
 		}
 		return temp;
@@ -123,42 +124,47 @@ public:
 			}
 			ptr->next = new Node(a);
 		}
-		sizeList += 1;
+		sizeDate++;
 	}
 	void pop()override
 	{
 		Node* temp = head;
-		cout << head->date << endl;
+		cout <<"Delete: " << head->date << endl;
 		head = head->next;
 		delete temp;
 	}
 	void clear() override
 	{
-		Node* ptr = head;
+		//Node* ptr = head;
 		Node* temp = head;
-		cout << head->date << endl;
-		head = head->next;
+		while (head != NULL) {
+			cout << "Delete: " << head->date << endl;
+			head = head->next;
+		}
 		delete temp;
 	}
 	void show() {
 		Node* ptr = head;
 		while (ptr != NULL)
 		{
-			cout << "Element1: " << ptr->date << endl;
+			cout << "Element: " << ptr->date << endl;
 			ptr = ptr->next;
 		}
 	}
 };
 
 void additionalTask() {
-	int size = 10;
-	int mas[3] = { 1,2,3 };
-	int mas1[3] = { 3,2,1 };
+	srand(time(NULL));
+	int size = 4;
+	//int mas[3] = { 1,2,3 };
+	//int mas1[3] = { 3,2,1 };
 	DynamicMassive a = DynamicMassive(size);
 	a = DynamicMassive(size);
 	cout << "Добавление(Push): " << endl;
 	a.push(2);
 	a.push(3);
+	a.push(9);
+	a.push(6);
 	a.show();
 	cout << "Удаение(POP): " << endl;
 	a.pop();
@@ -168,6 +174,7 @@ void additionalTask() {
 	a.clear();
 	a.show();
 	cout << endl;
+
 	DataQueue a1 = DataQueue();
 	a1.push(5);
 	a1.push(6);
@@ -178,9 +185,10 @@ void additionalTask() {
 	a1.show();
 	cout << "метод Operator INT: " << endl;
 	cout << "INT: " << a1.operator int() << endl;
-	cout << "метод Operator INT: " << endl;
-	cout << "string: " << a1.operator string() << endl;
+	cout << "метод Operator STRING: " << endl;
+	cout << "STRING: " << a1.operator string() << endl;
 	a1.clear();
+	a1.show();
 	system("pause");
 	system("cls");
 	return;
