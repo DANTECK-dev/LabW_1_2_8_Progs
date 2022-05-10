@@ -5,15 +5,17 @@
 #include "ListOfBuyers.h"
 
 #pragma region NaturalPerson
-NaturalPerson::NaturalPerson() {				//Физическое лицо
+template<typename T>
+NaturalPerson<T>::NaturalPerson() {				//Физическое лицо
 	this->FIO				= { "None" };
 	this->mobilePhoneNumber = { "None" };
 	this->accountNumber		= { "None" };
 }
-NaturalPerson::NaturalPerson(
+template<typename T>
+NaturalPerson<T>::NaturalPerson(
 	string FIO,
-	string mobilePhoneNumber,
-	string accountNumber
+	T mobilePhoneNumber,
+	T accountNumber
 ) {
 	this->FIO				= FIO;
 	this->mobilePhoneNumber = mobilePhoneNumber;
@@ -24,15 +26,17 @@ NaturalPerson::NaturalPerson(
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma region LegalPerson
-LegalPerson::LegalPerson() {					//Юридическое лицо
+template<typename T>
+LegalPerson<T>::LegalPerson() {					//Юридическое лицо
 	this->companuName	= { "None" };
 	this->customerINN	= { "None" };
 	this->accountNumber = { "None" };
 }
-LegalPerson::LegalPerson(
+template<typename T>
+LegalPerson<T>::LegalPerson(
 	string companuName,
-	string customerINN,
-	string accountNumber
+	T customerINN,
+	T accountNumber
 ) {
 	this->companuName	= companuName;
 	this->customerINN	= customerINN;
@@ -44,7 +48,8 @@ LegalPerson::LegalPerson(
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma region DataProduct
-DataProduct::DataProduct() {
+template<typename T>
+DataProduct<T>::DataProduct() {
 	this->productName		= { "None" };
 	this->typeOfProduct		= { "None" };
 	this->paymentDay		= { "None" };
@@ -52,13 +57,13 @@ DataProduct::DataProduct() {
 	this->companyAddress	= { "None" };
 	this->numberOfProduct	= 0;
 	this->sumOfProduct		= 0;
-
 }
-DataProduct::DataProduct(
-	string productName,
-	string typeOfProduct,
-	string paymentDay,
-	string vendorINN,
+template<typename T>
+DataProduct<T>::DataProduct(
+	T productName,
+	T typeOfProduct,
+	T paymentDay,
+	T vendorINN,
 	string companyAddress,
 	int numberOfProduct,
 	int sumOfProduct
@@ -71,7 +76,8 @@ DataProduct::DataProduct(
 	this->numberOfProduct	= numberOfProduct;
 	this->sumOfProduct		= sumOfProduct;
 }
-string DataProduct::getDataProduct() {
+template<typename T>
+string DataProduct<T>::getDataProduct() {
 	return "Название продукта: " + this->productName 
 		+ " Тип продукта: " + this->typeOfProduct 
 		+ " День оплаты: " + this->paymentDay
@@ -85,29 +91,34 @@ string DataProduct::getDataProduct() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma region ListItem
-ListItem::ListItem() {
+template<typename T>
+ListItem<T>::ListItem() {
+	this->DataProduct::DataProduct();
+	this->LegalPerson::LegalPerson();
+	this->NaturalPerson::NaturalPerson();
 	this->legalPerson = false;
 	this->next = NULL;
 	this->prev = NULL;
 }
-ListItem::ListItem(
+template<typename T>
+ListItem<T>::ListItem(
 	ListItem* next,
 	ListItem* prev,
 	bool legalPerson,
-	string productName,
-	string typeOfProduct,
-	string paymentDay,
-	string vendorINN,
+	T productName,
+	T typeOfProduct,
+	T paymentDay,
+	T vendorINN,
 	string companyAddress,
 	int numberOfProduct,
 	int sumOfProduct,
 	string FIO,
-	string mobilePhoneNumber,
-	string companuName,
-	string customerINN,
-	string accountNumber
+	T mobilePhoneNumber,
+	T companuName,
+	T customerINN,
+	T accountNumber
 ) {
-	this->DataProduct::DataProduct(
+	this->DataProduct<string>::DataProduct(
 		productName,
 		typeOfProduct,
 		paymentDay,
@@ -117,14 +128,14 @@ ListItem::ListItem(
 		sumOfProduct
 	);
 	if (legalPerson) {
-		this->LegalPerson::LegalPerson(			//Юр лицо
+		this->LegalPerson<string>::LegalPerson(			//Юр лицо
 			companuName,
 			customerINN,
 			accountNumber
 		);
 	}
 	else {
-		this->NaturalPerson::NaturalPerson(		//Физ лицо
+		this->NaturalPerson<string>::NaturalPerson(		//Физ лицо
 			FIO,
 			mobilePhoneNumber,
 			accountNumber
@@ -134,11 +145,12 @@ ListItem::ListItem(
 	this->next = next;
 	this->prev = prev;
 }
-ostream& ListItem::operator << (ostream& os) {
+template<typename T>
+ostream& ListItem<T>::operator << (ostream& os) {
 	string personType;
 	string personData;
-	if (this->legalPerson) { personType = { "Юридическое лицо" }; personData = this->LegalPerson::getDataPerson(); }
-	else { personType = { "Физическое лицо" }; personData = this->NaturalPerson::getDataPerson(); }
+	if (this->legalPerson) { personType = { "Юридическое лицо" }; personData = this->LegalPerson<string>::getDataPerson(); }
+	else { personType = { "Физическое лицо" }; personData = this->NaturalPerson<string>::getDataPerson(); }
 
 	os << personType << " "
 		<< personData << " "
@@ -157,19 +169,23 @@ ostream& ListItem::operator << (ostream& os) {
 		>> this->getDataProduct();
 	return os;
 }*/
+template<typename T>
+Data<T>* Data<T>::add(T data) {
+	return this->ListItem<T>::ListItem();
+}
 #pragma endregion
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #pragma region ListOfBuyers
 void ListOfBuyers::operator[](const int index) {
-	ListItem* LItemp = this->head;
+	ListItem<string>* LItemp = this->head;
 	for (int i = 0; i < index; i++)
 		LItemp = LItemp->next;
 	LItemp->operator<<(cout);
 }
 ListOfBuyers::operator int() const {
-	ListItem* LItemp = this->head;
+	ListItem<string>* LItemp = this->head;
 	int counter = 0;
 	if (LItemp == NULL) {
 		cout << counter;
@@ -226,7 +242,7 @@ void ListOfBuyers::addClients			() {
 			system("cls");
 
 			if (person == NULL) {
-				tail = new ListItem(
+				tail = new ListItem<string>(
 					NULL,
 					NULL,
 					newLegalPerson,
@@ -247,7 +263,7 @@ void ListOfBuyers::addClients			() {
 			}
 			else if (tail != NULL) {
 				person = tail;
-				person->next = new ListItem(
+				person->next = new ListItem<string>(
 					NULL,
 					person,
 					newLegalPerson,
@@ -314,7 +330,7 @@ void ListOfBuyers::addClients			() {
 			system("cls");
 
 			if (tail == NULL && head == NULL) {
-				tail = new ListItem(
+				tail = new ListItem<string>(
 					NULL,
 					NULL,
 					newLegalPerson,
@@ -336,7 +352,7 @@ void ListOfBuyers::addClients			() {
 			}
 			else if(tail != NULL) {
 				person = tail;
-				person->next = new ListItem(
+				person->next = new ListItem<string>(
 					NULL,
 					person,
 					newLegalPerson,
@@ -405,10 +421,6 @@ void ListOfBuyers::sortClients			() {
 			person = head;
 			for (int j = 0; j < counter - i; j++) {
 				if (person->getSumOfProduct() > person->next->getNumberOfProduct()) {
-					ListItem* TempNext1 = person->next;
-					ListItem* TempPrev1 = person->prev;
-					ListItem* TempNext2 = person->next->next;
-					ListItem* TempPrev2 = person->next->prev;
 					head = person->next;
 					person->next->next = person;
 					person->prev = person->next;
@@ -426,9 +438,9 @@ void ListOfBuyers::sortClients			() {
 			{
 				if (person->getSumOfProduct() > person->next->getNumberOfProduct())
 				{
-					ListItem* Temp1 = person;
-					ListItem* Temp2 = person->next;
-					ListItem* Temp3 = person->next->next;
+					ListItem<string>* Temp1 = person;
+					ListItem<string>* Temp2 = person->next;
+					ListItem<string>* Temp3 = person->next->next;
 
 					head = person->next;
 					Temp3->prev = Temp1;
@@ -450,9 +462,9 @@ void ListOfBuyers::sortClients			() {
 			{
 				if (person->getSumOfProduct() > person->next->getNumberOfProduct())
 				{
-					ListItem* Temp1 = person->prev;
-					ListItem* Temp2 = person;
-					ListItem* Temp3 = person->next;
+					ListItem<string>* Temp1 = person->prev;
+					ListItem<string>* Temp2 = person;
+					ListItem<string>* Temp3 = person->next;
 
 					tail = person->next;
 					Temp1->next = Temp3;
@@ -474,10 +486,10 @@ void ListOfBuyers::sortClients			() {
 			{
 				if (person->getSumOfProduct() > person->next->getNumberOfProduct())
 				{
-					ListItem* Temp1 = person->prev;
-					ListItem* Temp2 = person;
-					ListItem* Temp3 = person->next;
-					ListItem* Temp4 = person->next->next;
+					ListItem<string>* Temp1 = person->prev;
+					ListItem<string>* Temp2 = person;
+					ListItem<string>* Temp3 = person->next;
+					ListItem<string>* Temp4 = person->next->next;
 
 					Temp1->next = Temp3;
 					Temp2->next = Temp4;
@@ -500,13 +512,13 @@ void ListOfBuyers::transform			() {
 	cout << "\n\n\t\tКакие данные изменить\n"
 		<< "\n\t\tДанные покупателя\n";
 	if (person->legalPerson) {
-		cout << "\n\t1. Название компании - " << person->LegalPerson::getName()
-			<< "\n\t2. Номер ИНН" << person->LegalPerson::getInfoNum()
-			<< "\n\t3. Номер счёта - " << person->LegalPerson::getPayNum();
+		cout << "\n\t1. Название компании - " << person->LegalPerson<string>::getName()
+			<< "\n\t2. Номер ИНН" << person->LegalPerson<string>::getInfoNum()
+			<< "\n\t3. Номер счёта - " << person->LegalPerson<string>::getPayNum();
 	} else {
-		cout << "\n\t1. ФИО - " << person->NaturalPerson::getName()
-			<< "\n\t2. Номер телефона" << person->NaturalPerson::getInfoNum()
-			<< "\n\t3. Номер счёта - " << person->NaturalPerson::getPayNum();
+		cout << "\n\t1. ФИО - " << person->NaturalPerson<string>::getName()
+			<< "\n\t2. Номер телефона" << person->NaturalPerson<string>::getInfoNum()
+			<< "\n\t3. Номер счёта - " << person->NaturalPerson<string>::getPayNum();
 	}
 	cout << "\n\t\tДанные продукта\n"
 		<< "\n\t4. Название продукта - " << person->getProductName()
@@ -527,7 +539,7 @@ void ListOfBuyers::transform			() {
 				cout << "\n\n\tВведите название компании: ";
 				string companyName;
 				cin.get(); getline(cin, companyName);
-				person->LegalPerson::setName(companyName);
+				person->LegalPerson<string>::setName(companyName);
 			}
 			else {
 				cout << "\n\n\tВведите ФИО: ";
@@ -536,7 +548,7 @@ void ListOfBuyers::transform			() {
 				getline(cin, name);
 				getline(cin, pathr);
 				string FIO = surname + " " + name + " " + pathr;
-				person->NaturalPerson::setName(FIO);
+				person->NaturalPerson<string>::setName(FIO);
 			}
 			break;
 		}
@@ -545,13 +557,13 @@ void ListOfBuyers::transform			() {
 				cout << "\n\n\tВведите номер ИНН: ";
 				char charInfoNum[100];
 				cin.get(); cin.getline(charInfoNum, 100);
-				person->LegalPerson::setInfoNum(to_string(isInteger_l(charInfoNum)));
+				person->LegalPerson<string>::setInfoNum(to_string(isInteger_l(charInfoNum)));
 			}
 			else {
 				cout << "\n\n\tВведите номер телефоном: ";
 				char charMobNum[100];
 				cin.get(); cin.getline(charMobNum, 100);
-				person->LegalPerson::setInfoNum(to_string(isInteger_l(charMobNum)));
+				person->LegalPerson<string>::setInfoNum(to_string(isInteger_l(charMobNum)));
 			}
 			break;
 		}
@@ -559,8 +571,8 @@ void ListOfBuyers::transform			() {
 			cout << "\n\n\tВведите номер счёта: ";
 			char charCustomerINN[100];
 			cin.get(); cin.getline(charCustomerINN, 100);
-			if (person->legalPerson) person->LegalPerson::setInfoNum(to_string(isInteger_l(charCustomerINN)));
-			else person->LegalPerson::setInfoNum(to_string(isInteger_l(charCustomerINN)));
+			if (person->legalPerson) person->LegalPerson<string>::setInfoNum(to_string(isInteger_l(charCustomerINN)));
+			else person->LegalPerson<string>::setInfoNum(to_string(isInteger_l(charCustomerINN)));
 			break;
 		}
 		case(4): {
@@ -640,7 +652,7 @@ void ListOfBuyers::transformClients		() {
 			int couErr = 0;
 			int id = 1;
 			while (true) {
-				if (inputFIO == person->NaturalPerson::getName()) { searchID = id; couErr++; }
+				if (inputFIO == person->NaturalPerson<string>::getName()) { searchID = id; couErr++; }
 				if (person->next == NULL) break;
 				person = person->next;
 				id++;
@@ -689,7 +701,7 @@ void ListOfBuyers::transformClients		() {
 			int couErr = 0;
 			int id = 1;
 			while (true) {
-				if (inputCompanuName == person->LegalPerson::getName()) { searchID = id; couErr++; }
+				if (inputCompanuName == person->LegalPerson<string>::getName()) { searchID = id; couErr++; }
 				if (person->next == NULL) break;
 				person = person->next;
 				id++;
@@ -787,7 +799,7 @@ void ListOfBuyers::delClients			() {
 			int couErr = 0;
 			int id = 1;
 			while (true) {
-				if (inputFIO == person->NaturalPerson::getName()) { searchID = id; couErr++; }
+				if (inputFIO == person->NaturalPerson<string>::getName()) { searchID = id; couErr++; }
 				if (person->next == NULL) break;
 				person = person->next;
 				id++;
@@ -835,7 +847,7 @@ void ListOfBuyers::delClients			() {
 			int couErr = 0;
 			int id = 1;
 			while (true) {
-				if (inputCompanuName == person->LegalPerson::getName()) { searchID = id; couErr++; }
+				if (inputCompanuName == person->LegalPerson<string>::getName()) { searchID = id; couErr++; }
 				if (person->next == NULL) break;
 				person = person->next;
 				id++;
@@ -935,7 +947,7 @@ void ListOfBuyers::searchClients		() {
 			int couErr = 0;
 			int id = 1;
 			while (true) {
-				if (inputFIO == person->NaturalPerson::getName()) {
+				if (inputFIO == person->NaturalPerson<string>::getName()) {
 					searchID = id; 
 					cout << "\n\t"; 
 					person->operator<<(cout); 
@@ -960,7 +972,7 @@ void ListOfBuyers::searchClients		() {
 			int couErr = 0;
 			int id = 1;
 			while (true) {
-				if (inputCompanuName == person->LegalPerson::getName()) {
+				if (inputCompanuName == person->LegalPerson<string>::getName()) {
 					searchID = id;
 					cout << "\n\t";
 					person->operator<<(cout);
@@ -1114,7 +1126,7 @@ void ListOfBuyers::downloadClients		() {
 					inClients >> newSumOfProduct;
 				}
 				if (head == NULL) {
-					person = new ListItem(
+					person = new ListItem<string>(
 						NULL,
 						NULL,
 						newLegalPerson,
@@ -1136,7 +1148,7 @@ void ListOfBuyers::downloadClients		() {
 				}
 				else {
 					person = tail;
-					person->next = new ListItem(
+					person->next = new ListItem<string>(
 						NULL,
 						NULL,
 						newLegalPerson,
@@ -1223,7 +1235,7 @@ void ListOfBuyers::downloadClients		() {
 					inClients >> newSumOfProduct;
 				}
 				if (head == NULL) {
-					person = new ListItem(
+					person = new ListItem<string>(
 						NULL,
 						NULL,
 						newLegalPerson,
@@ -1245,7 +1257,7 @@ void ListOfBuyers::downloadClients		() {
 				}
 				else {
 					person = tail;
-					person->next = new ListItem(
+					person->next = new ListItem<string>(
 						NULL,
 						NULL,
 						newLegalPerson,

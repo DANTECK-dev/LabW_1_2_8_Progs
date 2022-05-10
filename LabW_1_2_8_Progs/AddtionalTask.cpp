@@ -156,15 +156,15 @@ void additionalTask() {
 	int mas1[3] = { 3,2,1 };
 	DynamicMassive a = DynamicMassive(size);
 	a = DynamicMassive(size);
-	cout << "Добавление(метод Push): " << endl;
+	cout << "Добавление(Push): " << endl;
 	a.push(2);
 	a.push(3);
 	a.show();
-	cout << "Удаение(метод POP): " << endl;
+	cout << "Удаение(POP): " << endl;
 	a.pop();
 	a.pop();
 	a.pop();
-	cout << "Очистка(метод Clear): " << endl;
+	cout << "Очистка(Clear): " << endl;
 	a.clear();
 	a.show();
 	cout << endl;
@@ -173,7 +173,7 @@ void additionalTask() {
 	a1.push(6);
 	a1.push(7);
 	a1.show();
-	cout << "Удаение(метод POP): " << endl;
+	cout << "Удаение(POP): " << endl;
 	a1.pop();
 	a1.show();
 	cout << "метод Operator INT: " << endl;
